@@ -11,7 +11,7 @@
      <h3>Person List</h3>
       <form name="person" action="" method="POST">
              <input type="submit" name="_eventId_addPerson" value="Add Person" />
-              <input type="submit" name="_eventId_cancel" value="Cancel" />
+              <input type="submit" name="_eventId_search" value="Search" />
       </form>
      <br><br>
       <div>

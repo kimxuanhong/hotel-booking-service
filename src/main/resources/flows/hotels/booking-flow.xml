@@ -25,7 +25,7 @@
 
     <view-state id="personList">
         <transition on="addPerson" to="addPerson"/>
-        <transition on="cancel" to="index"/>
+        <transition on="search" to="search"/>
     </view-state>
 
 </flow>

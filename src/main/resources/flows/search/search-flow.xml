@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <var name="searchCriteria" class="com.xhk.hotelbooking.model.SearchCriteria" />
+    <var name="personForm" class="com.xhk.hotelbooking.model.PersonForm" />
+
+    <view-state id="search" model="searchCriteria">
+        <transition on="proceed" to="personList">
+            <evaluate expression="personService.getPersons()" result="flowScope.persons" />
+        </transition>
+        <transition on="search" to="searchAction"/>
+    </view-state>
+
+    <decision-state id="searchAction">
+        <if test="personService.decisionFlow(searchCriteria)" then="searchByFirstName" else="searchByLastName"/>
+    </decision-state>
+
+    <action-state id="searchByFirstName">
+        <evaluate expression="personService.searchByFirstName(searchCriteria.personForm)" result="flowScope.persons" />
+        <transition to="personList" />
+    </action-state>
+
+    <action-state id="searchByLastName">
+        <evaluate expression="personService.searchByLastName(searchCriteria.personForm)" result="flowScope.persons" />
+        <transition to="personList" />
+    </action-state>
+
+    <view-state id="index" model="persons">
+        <transition on="proceed" to="addPerson"/>
+        <transition on="cancel" to="personList">
+        </transition>
+    </view-state>
+
+    <view-state id="addPerson" model="personForm">
+        <transition on="create" to="personList">
+            <evaluate expression="personService.addPerson(searchCriteria.personForm)" result="flowScope.persons" />
+        </transition>
+        <transition on="cancel" to="personList"/>
+    </view-state>
+
+    <view-state id="personList">
+        <transition on="addPerson" to="addPerson"/>
+        <transition on="search" to="search"/>
+    </view-state>
+
+</flow>

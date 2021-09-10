@@ -2,6 +2,8 @@ package com.xhk.hotelbooking.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
@@ -15,6 +17,7 @@ import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 
 import java.util.Collections;
+import java.util.function.Supplier;
 
 @EnableWebMvc
 @Configuration
@@ -85,6 +88,7 @@ public class WebFlowWithMvcConfig extends AbstractFlowConfiguration {
     public FreeMarkerConfigurer freemarkerConfig() {
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
         freeMarkerConfigurer.setTemplateLoaderPath("classpath:/templates/");
+        freeMarkerConfigurer.setResourceLoader(new DefaultResourceLoader());
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
         return freeMarkerConfigurer;
     }
