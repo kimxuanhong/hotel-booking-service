@@ -9,7 +9,10 @@
    </head>   
    <body>
      <h3>Person List</h3>
-     <a href="addPerson">Add Person</a>
+      <form name="person" action="" method="POST">
+             <input type="submit" name="_eventId_addPerson" value="Add Person" />
+              <input type="submit" name="_eventId_cancel" value="Cancel" />
+      </form>
      <br><br>
       <div>
           

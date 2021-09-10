@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <var name="personForm" class="com.xhk.hotelbooking.model.PersonForm" />
+
+	<on-start>
+		<evaluate expression="personService.getPersons()" result="flowScope.persons" />
+	</on-start>
+	
+    <view-state id="index" model="persons">
+        <transition on="proceed" to="addPerson"/>
+        <transition on="cancel" to="personList">
+        </transition>
+    </view-state>
+
+    <view-state id="addPerson" model="personForm">
+        <transition on="create" to="personList">
+            <evaluate expression="personService.addPerson(personForm)" result="flowScope.persons" />
+        </transition>
+        <transition on="cancel" to="personList"/>
+    </view-state>
+
+    <view-state id="personList">
+        <transition on="addPerson" to="addPerson"/>
+        <transition on="cancel" to="index"/>
+    </view-state>
+
+</flow>

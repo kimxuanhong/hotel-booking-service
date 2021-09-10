@@ -19,7 +19,8 @@
             <form name="person" action="" method="POST">
                First Name: <@spring.formInput "personForm.firstName" "" "text"/>    <br/>
                Last Name: <@spring.formInput "personForm.lastName" "" "text"/>    <br/>
-               <input type="submit" value="Create" />
+               <input type="submit" name="_eventId_create" value="Create" />
+               <input type="submit" name="_eventId_cancel" value="Cancel" />
             </form>
          </fieldset>
       </div>

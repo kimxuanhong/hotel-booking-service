@@ -14,10 +14,10 @@
       <#if message??>
       <h2>${message}</h2>
       </#if>
-     
-          
-      <a href="<@spring.url '/register'/>">Person List</a>  
-       
+     <form name="person" action="" method="POST">
+        <input type="submit" name="_eventId_proceed" value="Person List" />
+        <input type="submit" name="_eventId_cancel" value="Cancel" />
+     </form>
    </body>
     
 </html>
